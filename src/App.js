@@ -1,24 +1,38 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {useState, useEffect} from 'react';
+import Header from './components/Header'
+import Form from './components/Form'
+import List from './components/List'
 
 function App() {
+
+  const [data, setData] = useState([])
+  const [screen, setScreen] = useState(true)
+
+  useEffect(() => {
+    let initialList = JSON.parse(localStorage.getItem('Datos'));
+    if(initialList)
+      setData(initialList)
+  }, [ ])
+
+  useEffect(() => {
+    localStorage.setItem('Datos', JSON.stringify(data));
+  }, [ data ])
+
+  const handleScreen = () =>{
+    setScreen(!screen)
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="col-md-8 col-sm-10 container border my-4 py-4 shadow">
+      <Header screen={screen} handleScreen={handleScreen} />
+      {screen ?
+        <Form
+            setData={setData}
+            data={data}
+        />
+      :
+        <List data={data} />
+      }
     </div>
   );
 }
