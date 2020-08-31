@@ -48,7 +48,6 @@ const Form = ({setData, data}) => {
     }, 2000);
   }
 
-console.log(formData);
   return (  
     <>
       {message ? <Message msg={message} /> : null}
@@ -109,14 +108,14 @@ console.log(formData);
             <label forhtml="n2" className="font-weight-bold">N2</label>
             <select className="form-control" name="n2" id="n2" value={formData.n2} onChange={handleChange}>
               <option value="">-- Seleccione --</option>
-              <Select formData={formData} Nivel={2}/>
+                <Select formData={formData} Nivel={2}/>
             </select>
           </div>
           <div className="form-group col-4">
             <label forhtml="n3" className="font-weight-bold">N3</label>
             <select className="form-control" name="n3" id="n3" value={formData.n3} onChange={handleChange}>
               <option value="">-- Seleccione --</option>
-              <Select formData={formData} Nivel={3}/>
+                <Select formData={formData} Nivel={3}/>
             </select>
           </div>
         </div>

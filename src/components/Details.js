@@ -1,9 +1,17 @@
 import React from 'react';
 import Card from './Card'
-const Details = ({form}) => {
+import clienteAxios from '../config/axios';
+const Details = ({form, handleDelete}) => {
 
-  const URL =`http://localhost:4000/upload/${form.archivo}`
+  const URL =`${clienteAxios}/upload/${form.archivo}`
+
   if(!form) return
+
+  const handleButton = async () => {
+    handleDelete(form.archivo)
+    let res = await clienteAxios.delete(form.archivo)
+    console.log(res);
+  }
 
   return (  
     <div className="card my-1 col-sm-11 col-md-5 shadow" >
@@ -32,6 +40,7 @@ const Details = ({form}) => {
 
         <h5 className="my-auto border-top mt-1 pt-1">Observaciones:</h5>
         <p className="mb-0 ml-1 mr-3 my-auto">{form.observacion}</p>
+        <button type="button" onClick={handleButton} className="btn btn-info">Eliminar</button>
 
       </div>
     </div>

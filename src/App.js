@@ -22,16 +22,24 @@ function App() {
     setScreen(!screen)
   }
 
+  const handleDelete = (archivo) =>{
+    let newData = data.filter(_data => _data.archivo !== archivo)
+    setData(newData)
+  }
+
   return (
     <div className="col-md-8 col-sm-10 container border my-4 py-4 shadow">
       <Header screen={screen} handleScreen={handleScreen} />
       {screen ?
         <Form
-            setData={setData}
-            data={data}
+          setData={setData}
+          data={data}
         />
       :
-        <List data={data} />
+        <List 
+          data={data} 
+          handleDelete={handleDelete}
+        />
       }
     </div>
   );
